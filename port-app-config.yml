@@ -1,0 +1,13 @@
+resources:
+  - kind: repository
+    selector:
+      query: "true" # a JQ expression that it's output (boolean) determinating wheter to report the current resource or not
+    port:
+      entity:
+        mappings:
+          identifier: ".name" # The Entity identifier will be the repository name. After the creation of the Entity the exporter will send `PATCH` requests to update this repository within Port.
+          title: ".name"
+          blueprint: '"microservice"'
+          properties:
+            url: ".html_url" # fetching from GitHub metadata the repository url and injecting it as a url proeprty
+            description: ".description" # fetching from GitHub metadata the description and injecting it as a markdown proeprty
